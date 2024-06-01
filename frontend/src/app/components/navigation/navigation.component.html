@@ -1,0 +1,9 @@
+<p-menubar [model]="items" class="p-menubar-custom"  [style]="styleBar">
+  <ng-template pTemplate="end">
+    <button class="toggle-theme-button" (click)="toggleTheme()">
+      <i class="pi pi-moon" *ngIf="!themeService.isDarkTheme()"></i>
+      <i class="pi pi-sun" *ngIf="themeService.isDarkTheme()"></i>
+    </button>
+  </ng-template>
+</p-menubar>
+

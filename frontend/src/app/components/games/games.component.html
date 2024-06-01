@@ -1,0 +1,18 @@
+<div class="game-selection">
+    <h2>Select a Game</h2>
+    <div class="game-cards">
+      <p-card *ngFor="let game of games" class="game-card" [style]="styleInfoCard">
+        <ng-template pTemplate="header">
+          <img src="{{ game.image }}" alt="{{ game.name }}" class="game-image">
+        </ng-template>
+        <ng-template pTemplate="content">
+          <h3>{{ game.name }}</h3>
+          <p>{{ game.description }}</p>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <button pButton type="button" label="Play" (click)="navigateToGame(game.route)" class="play-button"></button>
+        </ng-template>
+      </p-card>
+    </div>
+</div>
+  

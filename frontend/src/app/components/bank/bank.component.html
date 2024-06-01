@@ -1,0 +1,46 @@
+<div class="bank-container">
+  <h1>
+    <i class="pi pi-building-columns" style="margin-right: 10px;"></i> Bank
+  </h1>
+
+  <div class="currency-selection">
+    <label for="currency">Select Currency: </label>
+    <p-dropdown [options]="currencyOptions" [(ngModel)]="selectedCurrency" optionLabel="label" placeholder="Select a Currency" (onChange)="onCurrencyChange($event)" [style]="styleBox">
+      <ng-template let-item pTemplate="selectedItem">
+        <i [class]="item.icon"></i> {{ item.label }}
+      </ng-template>
+      <ng-template let-item pTemplate="item">
+        <div class="currency-item">
+          <i [class]="item.icon"></i> {{ item.label }}
+        </div>
+      </ng-template>
+    </p-dropdown>
+    <div class="balance-display" *ngIf="selectedCurrency && selectedCurrency.balance !== undefined">
+      {{ selectedCurrency.balance | number }} {{ selectedCurrency.code }}
+    </div>
+  </div>
+
+  <div class="money-actions" *ngIf="selectedCurrency && selectedCurrency.amounts">
+    <div class="add-money">
+      <h2>Add Money</h2>
+      <p-toolbar>
+        <div class="p-toolbar-group-left">
+          <ng-container *ngFor="let amount of selectedCurrency.amounts">
+            <button pButton type="button" label="+{{ amount | number }} {{ selectedCurrency.code }}" (click)="addMoney(amount)" class="p-button-success"></button>
+          </ng-container>
+        </div>
+      </p-toolbar>
+    </div>
+
+    <div class="remove-money">
+      <h2>Remove Money</h2>
+      <p-toolbar>
+        <div class="p-toolbar-group-left">
+          <ng-container *ngFor="let amount of selectedCurrency.amounts">
+            <button pButton type="button" label="-{{ amount | number }} {{ selectedCurrency.code }}" (click)="removeMoney(amount)" class="p-button-danger"></button>
+          </ng-container>
+        </div>
+      </p-toolbar>
+    </div>
+  </div>
+</div>

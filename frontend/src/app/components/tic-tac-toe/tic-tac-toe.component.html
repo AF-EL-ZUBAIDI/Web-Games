@@ -1,0 +1,52 @@
+<p-toast></p-toast>
+<h1 class="game-title">Tic Tac Toe</h1>
+<div class="container">
+  <p-card class="info-card" [style]="styleInfoCard">
+    <div class="game-controls">
+      <h2>Game Controls</h2>
+      <div class="control-item">
+        <label for="currency">Currency: </label>
+        <p-dropdown [options]="currencyOptions" [(ngModel)]="selectedCurrency" placeholder="Select a Currency" optionLabel="label" [style]="styleBox">
+          <ng-template let-item pTemplate="selectedItem">
+            <i [class]="item.icon"></i> {{ item.code }}
+          </ng-template>
+          <ng-template let-item pTemplate="item">
+            <div class="currency-item">
+              <i [class]="item.icon"></i> {{ item.code }}
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <div class="control-item">
+        <label for="betAmount">Bet Amount:</label>
+        <div style="display: flex; align-items: center;">
+          <input pInputText type="number" [(ngModel)]="betAmount" [style]="styleBox" />
+          <button pButton type="button" label="Max" class="max-button" (click)="setMaxBet()" style="margin-left: 10px;"></button>
+        </div>
+      </div>
+      <div class="control-item">
+        <label for="difficulty">Difficulty:</label>
+        <div class="toggle-container">
+          <button pButton type="button" label="Easy" (click)="selectMode('easy')" [class.selected]="selectedMode === 'easy'"></button>
+          <button pButton type="button" label="Hard" (click)="selectMode('hard')" [class.selected]="selectedMode === 'hard'"></button>
+        </div>
+      </div>
+      <div class="control-buttons">
+        <button pButton type="button" label="Start Game" (click)="startGame()" [disabled]="gameActive" class="control-button"></button>
+        <button pButton type="button" [label]="gameActive ? 'Cash Out (' + potentialWinnings + ' ' + selectedCurrency?.code + ')' : 'Cash Out'" (click)="cashOut()" [disabled]="!gameActive || gameOver" class="control-button"></button>
+      </div>
+    </div>
+  </p-card>
+  <p-card class="board-card" [style]="styleBoard">
+    <div class="grid-container">
+      <div class="grid-item" *ngFor="let cell of board; let i = index" (click)="onCellClick(i)">
+        <p-card [style]="styleSmallCard">
+          <ng-template pTemplate="content">
+            <img *ngIf="cell === 'X'" src="assets/x2.png" alt="X" class="game-image" [style]="styleGem" />
+            <img *ngIf="cell === 'O'" src="assets/o.png" alt="O" class="game-image" [style]="styleBomb" />
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+  </p-card>
+</div>

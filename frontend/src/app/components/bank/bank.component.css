@@ -1,0 +1,81 @@
+.bank-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.currency-selection {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+  
+.currency-selection label {
+    margin-right: 10px;
+}
+  
+.currency-selection p-dropdown {
+    margin-right: 10px;
+}
+  
+.balance-display {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+  
+.balance-display i {
+    margin-right: 5px;
+}
+  
+.money-actions {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.add-money, .remove-money {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.p-toolbar-group-left {
+    display: flex;
+    justify-content: center;
+}
+
+.p-toolbar-group-left button {
+    margin: 5px;
+}
+
+.currency-item {
+    display: flex;
+    align-items: center;
+}
+
+.bank-icon {
+    font-size: 0.8em; 
+    vertical-align: middle; 
+}
+
+:host ::ng-deep .p-button-success {
+    background-color: #4caf50 !important;
+    border-color: #4caf50 !important;
+    color: white !important;
+}
+
+:host ::ng-deep .p-button-success:hover {
+    background-color: #45a049 !important;
+    border-color: #45a049 !important;
+}
+
+:host ::ng-deep .p-button-danger {
+    background-color: #f44336 !important;
+    border-color: #f44336 !important;
+    color: white !important;
+}
+
+:host ::ng-deep .p-button-danger:hover {
+    background-color: #e53935 !important;
+    border-color: #e53935 !important;
+}

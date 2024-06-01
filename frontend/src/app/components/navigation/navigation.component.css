@@ -1,0 +1,42 @@
+.toggle-theme-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5em;
+  width: 40px;  /* Adjust the size as needed */
+  height: 40px;  /* Adjust the size as needed */
+  border-radius: 50%;  /* Makes the button a circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--button-background-color, #ffffff);  /* Default background color */
+  color: var(--button-icon-color, #000000);  /* Default icon color */
+}
+
+.toggle-theme-button:hover {
+  background-color: var(--button-hover-background-color, #f0f0f0);  /* Background color on hover */
+}
+
+[data-theme='dark'] .toggle-theme-button {
+  background-color: var(--button-background-color-dark, #333333);  /* Dark mode background color */
+  color: var(--button-icon-color-dark, #f9f9f9);  /* Dark mode icon color */
+}
+
+[data-theme='dark'] .toggle-theme-button:hover {
+  background-color: var(--button-hover-background-color-dark, #444444);  /* Dark mode background color on hover */
+}
+
+.p-menubar-custom {
+  background-color: var(--navbar-background-color) !important;
+  color: var(--navbar-text-color) !important;
+  border: none !important;
+}
+
+.p-menubar-custom .p-menubar-root-list > .p-menubaritem > .p-menuitem-link {
+  color: var(--navbar-text-color) !important;
+}
+
+.p-menubar-custom .p-menubar-root-list > .p-menubaritem > .p-menuitem-link:hover {
+  background-color: var(--button-hover-background-color) !important;
+  color: var(--button-icon-color) !important;
+}
