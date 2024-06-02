@@ -31,9 +31,19 @@
           <button pButton type="button" label="Hard" (click)="selectMode('hard')" [class.selected]="selectedMode === 'hard'"></button>
         </div>
       </div>
+      <div class="control-item">
+        <label for="playerSymbol">Player Symbol:</label>
+        <div class="toggle-container">
+          <button pButton type="button" (click)="selectSymbol('X')" [class.selected]="selectedSymbol === 'X'">
+            <img src="assets/tictactoe/x.png" alt="X" class="symbol-image" />
+          </button>
+          <button pButton type="button" (click)="selectSymbol('O')" [class.selected]="selectedSymbol === 'O'">
+            <img src="assets/tictactoe/o.png" alt="O" class="symbol-image" />
+          </button>
+        </div>
+      </div>
       <div class="control-buttons">
         <button pButton type="button" label="Start Game" (click)="startGame()" [disabled]="gameActive" class="control-button"></button>
-        <button pButton type="button" [label]="gameActive ? 'Cash Out (' + potentialWinnings + ' ' + selectedCurrency?.code + ')' : 'Cash Out'" (click)="cashOut()" [disabled]="!gameActive || gameOver" class="control-button"></button>
       </div>
     </div>
   </p-card>
@@ -42,8 +52,8 @@
       <div class="grid-item" *ngFor="let cell of board; let i = index" (click)="onCellClick(i)">
         <p-card [style]="styleSmallCard">
           <ng-template pTemplate="content">
-            <img *ngIf="cell === 'X'" src="assets/x2.png" alt="X" class="game-image" [style]="styleGem" />
-            <img *ngIf="cell === 'O'" src="assets/o.png" alt="O" class="game-image" [style]="styleBomb" />
+            <img *ngIf="cell === 'X'" src="assets/tictactoe/x2.png" alt="X" class="game-image" [style]="styleGem" />
+            <img *ngIf="cell === 'O'" src="assets/tictactoe/o2.png" alt="O" class="game-image" [style]="styleBomb" />
           </ng-template>
         </p-card>
       </div>

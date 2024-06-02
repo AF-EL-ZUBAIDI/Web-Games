@@ -153,6 +153,14 @@ color: var(--label-text-color);
 }
 
 .toggle-container button.selected {
-  background-color: var(--primary-color); /* Change to blue for the selected button */
-  color: #fff; /* White text color for better contrast */
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.symbol-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+  margin: auto;
 }

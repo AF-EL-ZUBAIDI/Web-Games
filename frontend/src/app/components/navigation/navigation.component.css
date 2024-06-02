@@ -1,3 +1,35 @@
+.navbar-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: var(--container-navbar-background-color);
+  padding: 0.5rem 0.5rem;
+  margin-top: 1rem;
+}
+
+.navbar-logo {
+  height: 3rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.p-menubar-custom {
+  flex-grow: 1;
+  background-color: var(--navbar-background-color) !important;
+  color: var(--navbar-text-color) !important;
+  border: none !important;
+  margin-right: 1rem;
+}
+
+.p-menubar-custom .p-menubar-root-list > .p-menubaritem > .p-menuitem-link {
+  color: var(--navbar-text-color) !important;
+}
+
+.p-menubar-custom .p-menubar-root-list > .p-menubaritem > .p-menuitem-link:hover {
+  background-color: var(--button-hover-background-color) !important;
+  color: var(--button-icon-color) !important;
+}
+
 .toggle-theme-button {
   background: none;
   border: none;
@@ -24,19 +56,4 @@
 
 [data-theme='dark'] .toggle-theme-button:hover {
   background-color: var(--button-hover-background-color-dark, #444444);  /* Dark mode background color on hover */
-}
-
-.p-menubar-custom {
-  background-color: var(--navbar-background-color) !important;
-  color: var(--navbar-text-color) !important;
-  border: none !important;
-}
-
-.p-menubar-custom .p-menubar-root-list > .p-menubaritem > .p-menuitem-link {
-  color: var(--navbar-text-color) !important;
-}
-
-.p-menubar-custom .p-menubar-root-list > .p-menubaritem > .p-menuitem-link:hover {
-  background-color: var(--button-hover-background-color) !important;
-  color: var(--button-icon-color) !important;
 }

@@ -1,0 +1,54 @@
+<p-toast></p-toast>
+<h1 class="game-title">Dice Game</h1>
+<div class="container">
+  <p-card class="info-card" [style]="styleInfoCard">
+    <div class="game-controls">
+      <h2>Game Controls</h2>
+      <div class="control-item">
+        <label for="currency">Currency: </label>
+        <p-dropdown [options]="currencyOptions" [(ngModel)]="selectedCurrency" placeholder="Select a Currency" optionLabel="label" [style]="styleBox">
+          <ng-template let-item pTemplate="selectedItem">
+            <i [class]="item.icon"></i> {{ item.code }}
+          </ng-template>
+          <ng-template let-item pTemplate="item">
+            <div class="currency-item">
+              <i [class]="item.icon"></i> {{ item.code }}
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <div class="control-item">
+        <label for="betAmount">Bet Amount:</label>
+        <div style="display: flex; align-items: center;">
+          <input pInputText type="number" [(ngModel)]="betAmount" [style]="styleBox" />
+          <button pButton type="button" label="Max" class="max-button" (click)="setMaxBet()" style="margin-left: 10px;"></button>
+        </div>
+      </div>
+      <div class="control-item">
+        <label for="betType">Bet Type:</label>
+        <div class="toggle-container">
+          <button pButton type="button" label="Exact" (click)="selectBetType('exact')" [class.selected]="selectedBetType === 'exact'"></button>
+          <button pButton type="button" label="Above" (click)="selectBetType('above')" [class.selected]="selectedBetType === 'above'"></button>
+          <button pButton type="button" label="Below" (click)="selectBetType('below')" [class.selected]="selectedBetType === 'below'"></button>
+        </div>
+      </div>
+      <div class="control-item" *ngIf="selectedBetType === 'exact' || selectedBetType === 'above' || selectedBetType === 'below'">
+        <label for="betNumber">Bet Number (2-12):</label>
+        <input pInputText type="number" [style]="styleBox" [(ngModel)]="betNumber" min="2" max="12" />
+      </div>
+      <div class="control-buttons">
+        <button pButton type="button" label="Start Game" (click)="startGame()" class="control-button"></button>
+      </div>
+    </div>
+  </p-card>
+  <p-card class="board-card" [style]="styleBoard">
+    <div class="dice-animation-container">
+      <div class="dice-animation">
+        <img [src]="currentDiceImage1" alt="Dice 1" class="dice-image">
+      </div>
+      <div class="dice-animation">
+        <img [src]="currentDiceImage2" alt="Dice 2" class="dice-image">
+      </div>
+    </div>
+  </p-card>
+</div>

@@ -12,7 +12,7 @@ export class NavigationComponent implements OnInit {
   styleBar = {
     color: 'var(--nav-text-color)',
     background: 'var(--nav-bar-background-color)',
-    'border': 'yes',
+    border: 'yes',
   };
 
   constructor(private themeService: ThemeService) {}

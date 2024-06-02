@@ -21,6 +21,8 @@ import { GameService } from './services/game.service';
 import { GamesComponent } from './components/games/games.component';
 import { TicTacToeComponent } from './components/tic-tac-toe/tic-tac-toe.component';
 import { CommonModule } from '@angular/common';
+import { DiceComponent } from './components/dice/dice.component';
+import { StopWatchComponent } from './components/stop-watch/stop-watch.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { CommonModule } from '@angular/common';
     HomeComponent,
     NavigationComponent,
     GamesComponent,
-    TicTacToeComponent
+    TicTacToeComponent,
+    DiceComponent,
+    StopWatchComponent
   ],
   bootstrap: [AppComponent],
   imports: [

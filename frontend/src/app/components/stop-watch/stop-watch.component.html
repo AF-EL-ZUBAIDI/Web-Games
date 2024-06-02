@@ -1,0 +1,50 @@
+<p-toast></p-toast>
+<h1 class="game-title">Stop Watch</h1>
+<div class="container">
+  <p-card class="info-card" [style]="styleInfoCard">
+    <div class="game-controls">
+      <h2>Game Controls</h2>
+      <div class="control-item">
+        <label for="currency">Currency: </label>
+        <p-dropdown [options]="currencyOptions" [(ngModel)]="selectedCurrency" placeholder="Select a Currency" optionLabel="label" [style]="styleBox">
+          <ng-template let-item pTemplate="selectedItem">
+            <i [class]="item.icon"></i> {{ item.code }}
+          </ng-template>
+          <ng-template let-item pTemplate="item">
+            <div class="currency-item">
+              <i [class]="item.icon"></i> {{ item.code }}
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <div class="control-item">
+        <label for="betAmount">Bet Amount:</label>
+        <div style="display: flex; align-items: center;">
+          <input pInputText type="number" [(ngModel)]="betAmount" [style]="styleBox" />
+          <button pButton type="button" label="Max" class="max-button" (click)="setMaxBet()" style="margin-left: 10px;"></button>
+        </div>
+      </div>
+      <div class="control-buttons">
+        <button pButton type="button" label="Start Stopwatch" (click)="startStopwatch()" class="control-button" [disabled]="stopwatchRunning"></button>
+        <button pButton type="button" label="Stop Stopwatch" (click)="stopStopwatch()" class="control-button stop-button" [disabled]="!stopwatchRunning"></button>
+      </div>
+    </div>
+  </p-card>
+  <div class="right-panel">
+    <p-card class="board-card" [style]="styleBoard">
+      <div class="stopwatch-display">
+        <h2>{{ displayTime }}</h2>
+      </div>
+    </p-card>
+    <p-card class="info-card-winning" [style]="styleInfoCard">
+      <div class="winnings-info">
+        <h2>Potential Winnings</h2>
+        <p>Exactly 10.000: 100x Bet</p>
+        <p>Between 9.980 and 10.020: 10x Bet</p>
+        <p>Between 9.950 and 10.050: 5x Bet</p>
+        <p>Between 9.900 and 10.100: 3x Bet</p>
+        <p>Between 9.800 and 10.200: 2x Bet</p>
+      </div>
+    </p-card>
+  </div>
+</div>

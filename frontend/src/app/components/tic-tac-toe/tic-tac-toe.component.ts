@@ -14,6 +14,7 @@ export class TicTacToeComponent implements OnInit {
   selectedCurrency: any;
   betAmount: number;
   selectedMode: string = 'easy';  // Default selection
+  selectedSymbol: string = 'X';  // Default symbol
   board: string[] = Array(9).fill('');
   gameActive: boolean = false;
   gameOver: boolean = false;
@@ -96,6 +97,10 @@ export class TicTacToeComponent implements OnInit {
     this.selectedMode = mode;
   }
 
+  selectSymbol(symbol: string) {
+    this.selectedSymbol = symbol;
+  }
+
   startGame() {
     if (!this.selectedCurrency || this.betAmount == null || this.betAmount <= 0 || !this.selectedMode) {
       this.messageService.add({ severity: 'warn', summary: 'Invalid Input', detail: 'Please fill in all fields correctly.' });
@@ -111,7 +116,8 @@ export class TicTacToeComponent implements OnInit {
     this.http.post(`${AppConfig.apiBaseUrl}/start_tic_tac_toe`, {
       currency: this.selectedCurrency.code,
       bet_amount: this.betAmount,
-      difficulty: this.selectedMode
+      difficulty: this.selectedMode,
+      player_symbol: this.selectedSymbol
     }).subscribe(
       (response: any) => {
         if (response.error) {
@@ -123,6 +129,11 @@ export class TicTacToeComponent implements OnInit {
           this.gameOver = false;
           this.potentialWinnings = this.betAmount; // Initialize potential winnings
           this.messageService.add({ severity: 'success', summary: 'Game Started', detail: 'The game has started! If you leave the page, your bet amount will be lost.' });
+
+          // If the player chose 'O', make the first move for the computer
+          if (this.selectedSymbol === 'O') {
+            this.board[response.computerMove] = 'X';
+          }
         }
       },
       (error: any) => {
@@ -153,12 +164,19 @@ export class TicTacToeComponent implements OnInit {
 
       this.board[index] = response.playerMove;
       if (response.gameOver) {
+        this.board[response.computerMove] = this.selectedSymbol === 'X' ? 'O' : 'X';  // Update board with the last move of the computer
         this.gameOver = true;
         this.gameActive = false;
         this.potentialWinnings = response.winnings;
-        this.messageService.add({ severity: 'success', summary: 'Game Over', detail: response.message });
+        if (response.winner === this.selectedSymbol) {
+          this.messageService.add({ severity: 'success', summary: 'You Won!', detail: `Congratulations! You won ${this.potentialWinnings} ${this.selectedCurrency.code}.` });
+        } else if (response.winner === 'draw') {
+          this.messageService.add({ severity: 'info', summary: 'Draw', detail: 'The game is a draw.' });
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Game Over', detail: 'The computer won!' });
+        }
       } else {
-        this.board[response.computerMove] = 'O';
+        this.board[response.computerMove] = this.selectedSymbol === 'X' ? 'O' : 'X';
         if (response.computerWin) {
           this.gameOver = true;
           this.gameActive = false;
@@ -168,27 +186,5 @@ export class TicTacToeComponent implements OnInit {
     });
   }
 
-  cashOut() {
-    this.http.post(`${AppConfig.apiBaseUrl}/cash_out_tic_tac_toe`, {
-      game_id: this.gameId
-    }).subscribe(
-      (response: any) => {
-        if (response.error) {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: response.error });
-        } else {
-          this.gameActive = false;
-          this.gameOver = true;
-          this.messageService.add({ severity: 'success', summary: 'Cashed Out', detail: `You won ${response.winnings} ${this.selectedCurrency.code}!` });
-          console.log('Currency:', this.selectedCurrency.code);
-        }
-      },
-      (error: any) => {
-        if (error.status === 400 && error.error.error === 'Cannot cash out without making any moves') {
-          this.messageService.add({ severity: 'warn', summary: 'Invalid Action', detail: 'You must make at least one move to cash out.' });
-        } else {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An unexpected error occurred.' });
-        }
-      }
-    );
-  }
+  // Remove the cashOut method as it's not needed anymore
 }

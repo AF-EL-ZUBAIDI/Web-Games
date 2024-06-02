@@ -40,8 +40,8 @@
       <div class="grid-item" *ngFor="let cell of board; let i = index" (click)="onCellClick(i)">
         <p-card [style]="styleSmallCard">
           <ng-template pTemplate="content">
-            <img *ngIf="cell === 'G'" src="assets/gem.png" alt="Gem" class="game-image" [style]="styleGem" />
-            <img *ngIf="cell === 'B'" src="assets/bomb.png" alt="Bomb" class="game-image" [style]="styleBomb" />
+            <img *ngIf="cell === 'G'" src="assets/mines/gem2.png" alt="Gem" class="game-image" [style]="styleGem" />
+            <img *ngIf="cell === 'B'" src="assets/mines/bomb2.png" alt="Bomb" class="game-image" [style]="styleBomb" />
           </ng-template>
         </p-card>
       </div>

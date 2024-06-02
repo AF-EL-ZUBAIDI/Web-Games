@@ -28,7 +28,7 @@ export class MinesComponent implements OnInit {
 
   styleBox = {
     color: 'var(--box-text-color)',
-    'background': 'var(--box-background-color)',
+    background: 'var(--box-background-color)',
     'border': 'yes'
   };
 

@@ -15,6 +15,8 @@
   --nav-text-color: #495057;
   --box-background-color: #ffffff;
   --box-text-color: #495057;
+  --container-navbar-background-color: #ffffff;
+  --new-info-card-background-color: #ffffff;
 }
 
 [data-theme='dark'] {
@@ -34,6 +36,8 @@
   --nav-text-color: #ffffff;
   --box-background-color: #2e2e2e;
   --box-text-color: #ffffff;
+  --container-navbar-background-color: #1d1d1d;
+  --new-info-card-background-color: #2e2e2e;
 }
 
 body {
@@ -45,35 +49,5 @@ p-card {
   background: var(--card-background-color);
 }
 
-.navbar {
-  background-color: var(--navbar-background-color);
-  color: var(--navbar-text-color);
-}
 
-.toggle-theme-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.5em;
-  width: 40px;  
-  height: 40px;  
-  border-radius: 50%; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--button-background-color, #ffffff);  
-  color: var(--button-icon-color, #000000); 
-}
 
-.toggle-theme-button:hover {
-  background-color: var(--button-hover-background-color, #f0f0f0);
-}
-
-[data-theme='dark'] .toggle-theme-button {
-  background-color: var(--button-background-color-dark, #333333);
-  color: var(--button-icon-color-dark, #f9f9f9);
-}
-
-[data-theme='dark'] .toggle-theme-button:hover {
-  background-color: var(--button-hover-background-color-dark, #444444);  /* Dark mode background color on hover */
-}
