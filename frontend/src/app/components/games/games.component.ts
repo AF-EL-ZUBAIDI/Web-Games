@@ -33,6 +33,12 @@ export class GamesComponent implements OnInit {
       route: '/games/stop-watch',
       image: 'assets/stop_watch/stop_watch_board.png'
     },
+    {
+      name: 'War',
+      description: 'Win the war and double your money!',
+      route: '/games/war',
+      image: 'assets/war/war_board.png'
+    },
   ];
 
   constructor(private router: Router) { }

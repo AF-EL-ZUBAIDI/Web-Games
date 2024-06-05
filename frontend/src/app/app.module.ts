@@ -23,6 +23,7 @@ import { TicTacToeComponent } from './components/tic-tac-toe/tic-tac-toe.compone
 import { CommonModule } from '@angular/common';
 import { DiceComponent } from './components/dice/dice.component';
 import { StopWatchComponent } from './components/stop-watch/stop-watch.component';
+import { WarComponent } from './components/war/war.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { StopWatchComponent } from './components/stop-watch/stop-watch.component
     GamesComponent,
     TicTacToeComponent,
     DiceComponent,
-    StopWatchComponent
+    StopWatchComponent,
+    WarComponent
   ],
   bootstrap: [AppComponent],
   imports: [

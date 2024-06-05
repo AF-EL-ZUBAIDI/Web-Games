@@ -1,0 +1,54 @@
+<p-toast></p-toast>
+<h1 class="game-title">War Game</h1>
+<div class="container">
+  <p-card class="info-card" [style]="styleInfoCard">
+    <div class="game-controls">
+      <h2>Game Controls</h2>
+      <div class="control-item">
+        <label for="currency">Currency: </label>
+        <p-dropdown [options]="currencyOptions" [(ngModel)]="selectedCurrency" placeholder="Select a Currency" optionLabel="label" [style]="styleBox">
+          <ng-template let-item pTemplate="selectedItem">
+            <i [class]="item.icon"></i> {{ item.code }}
+          </ng-template>
+          <ng-template let-item pTemplate="item">
+            <div class="currency-item">
+              <i [class]="item.icon"></i> {{ item.code }}
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <div class="control-item">
+        <label for="betAmount">Bet Amount:</label>
+        <div style="display: flex; align-items: center;">
+          <input pInputText type="number" [(ngModel)]="betAmount" [style]="styleBox" />
+          <button pButton type="button" label="Max" class="max-button" (click)="setMaxBet()" style="margin-left: 10px;"></button>
+        </div>
+        <label>Computer's Won Cards: {{ computerWonCardsCount }}</label>
+        <label>Your Won Cards: {{ playerWonCardsCount }}</label>
+      </div>
+      <div class="control-buttons">
+        <button pButton type="button" label="Start Game" (click)="startGame()" class="control-button" [disabled]="gameActive"></button>
+      </div>
+    </div>
+  </p-card>
+  <div class="board" [ngStyle]="{'background-image': 'url(' + boardBackgroundUrl + ')'}">
+    <div class="computer-cards">
+      <div class="card" *ngFor="let card of computerDeck">
+        <img src="assets/war/cards/back_cp_card.png" alt="Computer card back">
+      </div>
+    </div>
+    <div class="battlefield">
+      <div class="card" *ngIf="playerCard">
+        <img [src]="'assets/war/cards/' + playerCard.value + '_of_' + playerCard.suit + '.png'" alt="{{ playerCard.value }} of {{ playerCard.suit }}">
+      </div>
+      <div class="card" *ngIf="computerCard">
+        <img [src]="'assets/war/cards/' + computerCard.value + '_of_' + computerCard.suit + '.png'" alt="{{ computerCard.value }} of {{ computerCard.suit }}">
+      </div>
+    </div>
+    <div class="player-cards">
+      <div class="card" *ngFor="let card of playerDeck; let i = index" (click)="selectPlayerCard(i)">
+        <img [src]="'assets/war/cards/' + card.value + '_of_' + card.suit + '.png'" alt="{{ card.value }} of {{ card.suit }}">
+      </div>
+    </div>
+  </div>
+</div>
