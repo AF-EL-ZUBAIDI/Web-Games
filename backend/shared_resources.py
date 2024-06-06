@@ -9,3 +9,4 @@ games = {}
 tic_tac_toe_games = {}
 dice_games = {}
 war_games = {}
+stopwatch_games = {}

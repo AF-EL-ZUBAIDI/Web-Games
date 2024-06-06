@@ -1,5 +1,4 @@
 import time
-import random as rd
 
 class StopwatchGame:
     def __init__(self):
@@ -24,3 +23,4 @@ class StopwatchGame:
         if abs(elapsed_time - self.target_time) <= self.allowed_diff:
             return self.bet_amount * 2
         return 0
+    

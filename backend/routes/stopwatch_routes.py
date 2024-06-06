@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 import time
-from shared_resources import games, user_balances
+from shared_resources import stopwatch_games, user_balances
 
 stopwatch_bp = Blueprint('stopwatch_bp', __name__)
 
@@ -18,10 +18,10 @@ def start_stopwatch():
 
     user_balances[currency]['balance'] -= bet_amount
 
-    game_id = len(games) + 1
+    game_id = len(stopwatch_games) + 1
     start_time = time.time()
 
-    games[game_id] = {
+    stopwatch_games[game_id] = {
         "currency": currency,
         "bet_amount": bet_amount,
         "start_time": start_time,
@@ -39,10 +39,10 @@ def stop_stopwatch():
     game_id = data['game_id']
     elapsed_time = data['elapsed_time'] / 1000.0  # Convert milliseconds to seconds
 
-    if game_id not in games:
+    if game_id not in stopwatch_games:
         return jsonify({"error": "Game not found"}), 400
 
-    game = games[game_id]
+    game = stopwatch_games[game_id]
 
     if not game['game_active']:
         return jsonify({"error": "Game already ended"}), 400

@@ -6,13 +6,13 @@
       <h2>Game Controls</h2>
       <div class="control-item">
         <label for="currency">Currency: </label>
-        <p-dropdown  [options]="currencyOptions" [(ngModel)]="selectedCurrency" placeholder="Select a Currency" optionLabel="label" [style]="styleBox">
+        <p-dropdown [options]="currencyOptions" [(ngModel)]="selectedCurrency" placeholder="Select a Currency" optionLabel="label" [style]="styleBox">
           <ng-template let-item pTemplate="selectedItem">
-            <i [class]="item.icon"></i> {{ item.code }}
+            {{ item.code }}
           </ng-template>
           <ng-template let-item pTemplate="item">
             <div class="currency-item">
-              <i [class]="item.icon"></i> {{ item.code }}
+              {{ item.code }}
             </div>
           </ng-template>
         </p-dropdown>
@@ -26,7 +26,7 @@
       </div>
       <div class="control-item">
         <label for="numBombs">Number of Bombs:</label>
-        <p-dropdown [options]="bombOptions" [(ngModel)]="numBombs" placeholder="Select Number of Bombs" [style]="styleBox" ></p-dropdown>
+        <p-dropdown [options]="bombOptions" [(ngModel)]="numBombs" placeholder="Select Number of Bombs" [style]="styleBox"></p-dropdown>
       </div>
       <div class="control-buttons">
         <button pButton type="button" label="Start Game" (click)="startGame()" [disabled]="gameActive" class="control-button"></button>

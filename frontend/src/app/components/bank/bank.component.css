@@ -3,34 +3,34 @@
     flex-direction: column;
     align-items: center;
 }
-  
+
 .currency-selection {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
-  
+
 .currency-selection label {
     margin-right: 10px;
 }
-  
+
 .currency-selection p-dropdown {
     margin-right: 10px;
 }
-  
+
 .balance-display {
     margin-left: 10px;
     display: flex;
     align-items: center;
 }
-  
+
 .balance-display i {
     margin-right: 5px;
 }
-  
+
 .money-actions {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     margin-top: 20px;
 }
 
@@ -42,10 +42,11 @@
 .p-toolbar-group-left {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .p-toolbar-group-left button {
-    margin: 5px;
+    margin: 10px;
 }
 
 .currency-item {
@@ -54,8 +55,8 @@
 }
 
 .bank-icon {
-    font-size: 0.8em; 
-    vertical-align: middle; 
+    font-size: 0.8em;
+    vertical-align: middle;
 }
 
 :host ::ng-deep .p-button-success {
@@ -78,4 +79,21 @@
 :host ::ng-deep .p-button-danger:hover {
     background-color: #e53935 !important;
     border-color: #e53935 !important;
+}
+
+.currency-balances {
+    width: 50rem;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+.currency-balances th,
+.currency-balances td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+.currency-balances th {
+    background-color: var(--background-currency-balances-th);
 }

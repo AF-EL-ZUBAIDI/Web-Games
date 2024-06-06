@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SelectItem } from 'primeng/api';
-import { AppConfig } from '../../app-config'; 
+import { AppConfig } from '../../app-config';
 
 @Component({
   selector: 'app-bank',
@@ -12,6 +12,7 @@ export class BankComponent implements OnInit {
   currencies = [];
   currencyOptions: SelectItem[] = [];
   selectedCurrency: any;
+  balances: { [key: string]: number } = {};
   styleBox = {
     color: 'var(--box-text-color)',
     background: 'var(--box-background-color)',
@@ -26,16 +27,20 @@ export class BankComponent implements OnInit {
 
   fetchCurrencies() {
     this.http.get(`${AppConfig.apiBaseUrl}/currencies`).subscribe((data: any[]) => {
-      console.log("Currencies fetched:", data);
+      //console.log("Currencies fetched:", data);
       this.currencies = data;
       this.currencyOptions = data.map(currency => ({
-        label: currency.label,
+        label: currency.code,
         value: { ...currency, balance: 0 },
         icon: currency.icon
       }));
-      this.selectedCurrency = this.currencyOptions[0]?.value;
-      this.fetchBalance(this.selectedCurrency.code);
-      console.log('Default Selected Currency:', this.selectedCurrency);
+      this.currencyOptions.forEach(currency => {
+        this.fetchBalance(currency.value.code);
+      });
+      if (this.currencyOptions.length > 0) {
+        this.selectedCurrency = this.currencyOptions[0].value;
+        this.fetchBalance(this.selectedCurrency.code);
+      }
     }, error => {
       console.error('Error fetching currencies:', error);
     });
@@ -44,15 +49,14 @@ export class BankComponent implements OnInit {
   onCurrencyChange(event: any) {
     this.selectedCurrency = { ...event.value.value || event.value };
     this.fetchBalance(this.selectedCurrency.code);
-    console.log('Currency changed:', this.selectedCurrency);
-    console.log('Selected Currency Balance:', this.selectedCurrency.balance);
-    console.log('Selected Currency Amounts:', this.selectedCurrency.amounts);
   }
 
   fetchBalance(currencyCode: string) {
     this.http.get(`${AppConfig.apiBaseUrl}/balance/${currencyCode}`).subscribe((response: any) => {
-      this.selectedCurrency.balance = response.balance;
-      console.log(`Balance for ${currencyCode}:`, this.selectedCurrency.balance);
+      this.balances[currencyCode] = response.balance;
+      if (this.selectedCurrency.code === currencyCode) {
+        this.selectedCurrency.balance = response.balance;
+      }
     }, error => {
       console.error(`Error fetching balance for ${currencyCode}:`, error);
     });
@@ -64,7 +68,7 @@ export class BankComponent implements OnInit {
       amount: amount
     }).subscribe((response: any) => {
       this.selectedCurrency.balance = response['new_balance'];
-      console.log('New balance:', this.selectedCurrency.balance);
+      this.balances[this.selectedCurrency.code] = response['new_balance'];
     }, error => {
       console.error('Error adding money:', error);
     });
@@ -76,9 +80,14 @@ export class BankComponent implements OnInit {
       amount: amount
     }).subscribe((response: any) => {
       this.selectedCurrency.balance = response['new_balance'];
-      console.log('New balance:', this.selectedCurrency.balance);
+      this.balances[this.selectedCurrency.code] = response['new_balance'];
     }, error => {
       console.error('Error removing money:', error);
     });
   }
+
+  getCurrencyPlaceholder() {
+    return this.selectedCurrency ? `${this.selectedCurrency.code}` : 'Select a Currency';
+  }
+
 }

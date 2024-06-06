@@ -66,7 +66,7 @@ export class MinesComponent implements OnInit {
   fetchCurrencies() {
     this.http.get(`${AppConfig.apiBaseUrl}/currencies`).subscribe((data: any) => {
       this.currencyOptions = data.map((currency: any) => ({
-        label: `${currency.icon} ${currency.code} (${currency.label})`,
+        label: `${currency.code}`,
         code: currency.code,
         icon: currency.icon,
         fullLabel: `${currency.code} (${currency.label})`,
@@ -182,7 +182,6 @@ export class MinesComponent implements OnInit {
           this.gameActive = false;
           this.gameOver = true;
           this.messageService.add({ severity: 'success', summary: 'Cashed Out', detail: `You won ${response.winnings} ${this.selectedCurrency.code}!` });
-          console.log('Currency:', this.selectedCurrency.code);
         }
       },
       (error: any) => {

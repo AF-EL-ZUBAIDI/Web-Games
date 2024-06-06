@@ -6,10 +6,10 @@ currency_bp = Blueprint('currency_bp', __name__)
 @currency_bp.route('/currencies', methods=['GET'])
 def get_currencies():
     currencies = [
-        {'label': 'Dollar', 'code': 'USD', 'icon': 'pi pi-dollar', 'max': 100000000, 'amounts': [100, 10000, 100000, 1000000]},
-        {'label': 'Euro', 'code': 'EUR', 'icon': 'pi pi-euro', 'max': 100000000, 'amounts': [100, 10000, 100000, 1000000]},
-        {'label': 'Bitcoin', 'code': 'BTC', 'icon': 'pi pi-bitcoin', 'max': 21000000, 'amounts': [1, 10, 100, 1000]},
-        {'label': 'Ethereum', 'code': 'ETH', 'icon': 'pi pi-ethereum', 'max': 21000000, 'amounts': [1, 10, 100, 1000]}
+        {'label': 'Dollar', 'code': 'USD', 'icon': 'pi pi-dollar', 'max': 1000000000, 'amounts': [100, 10000, 100000, 1000000, 10000000]},
+        {'label': 'Euro', 'code': 'EUR', 'icon': 'pi pi-euro', 'max': 1000000000, 'amounts': [100, 10000, 100000, 1000000, 10000000]},
+        {'label': 'Bitcoin', 'code': 'BTC', 'icon': 'pi pi-bitcoin', 'max': 21000000, 'amounts': [1, 10, 100, 1000, 10000]},
+        {'label': 'Ethereum', 'code': 'ETH', 'icon': 'pi pi-ethereum', 'max': 21000000, 'amounts': [1, 10, 100, 1000, 10000]}
     ]
     return jsonify(currencies)
 
@@ -77,7 +77,7 @@ def cash_out():
     if game.gems_revealed == 0:
         return jsonify({"error": "Cannot cash out without revealing any gems"}), 400
 
-    winnings = bet_amount * (1 + 0.1 * game.gems_revealed)
+    winnings = bet_amount * (1 + 0.5 * game.gems_revealed)
     user_balances[currency]['balance'] += winnings
 
     del games[game_id]

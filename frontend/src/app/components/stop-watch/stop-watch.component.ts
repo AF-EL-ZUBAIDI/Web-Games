@@ -114,7 +114,7 @@ export class StopWatchComponent implements OnInit {
     this.stopwatchRunning = false;
 
     const elapsedMilliseconds = Date.now() - this.startTime;
-    this.updateDisplayTime(elapsedMilliseconds);  // Ensure display updates with final elapsed time
+    this.updateDisplayTime(elapsedMilliseconds);
 
     this.http.post(`${AppConfig.apiBaseUrl}/stop_stopwatch`, { game_id: this.gameId, elapsed_time: elapsedMilliseconds }).subscribe(
       (response: any) => {

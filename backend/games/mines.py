@@ -15,6 +15,7 @@ class MinesGame:
         for pos in positions:
             row, col = divmod(pos, self.size)
             self.board[row][col] = 'B'
+            # print(f"Bomb at ({row+1}, {col+1})")
         for row in range(self.size):
             for col in range(self.size):
                 if self.board[row][col] != 'B':

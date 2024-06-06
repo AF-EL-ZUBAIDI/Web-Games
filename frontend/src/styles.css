@@ -17,6 +17,7 @@
   --box-text-color: #495057;
   --container-navbar-background-color: #ffffff;
   --new-info-card-background-color: #ffffff;
+  --background-currency-balances-th: #f4f4f4;
 }
 
 [data-theme='dark'] {
@@ -38,6 +39,7 @@
   --box-text-color: #ffffff;
   --container-navbar-background-color: #1d1d1d;
   --new-info-card-background-color: #2e2e2e;
+  --background-currency-balances-th: #2e2e2e;
 }
 
 body {
